@@ -63,28 +63,41 @@
             color: #2c3e50;
             font-size: 0.95rem;
         }
-        .model-row {
+        /* 🟢 新增：模型网格布局 — 每行 3 个卡片 */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .model-card {
+            background: #f0f2f6;
+            border-radius: 6px;
+            padding: 0.3rem 0.6rem 0.5rem 0.6rem;
+            border: 1px solid #e2e6ec;
             display: flex;
             align-items: center;
+            gap: 0.4rem;
             flex-wrap: wrap;
-            padding: 0.3rem 0;
-            border-bottom: 1px solid #f0f0f0;
+            transition: 0.1s;
         }
-        .model-row:last-child {
-            border-bottom: none;
+        .model-card:hover {
+            border-color: #b0c8d4;
+            background: #e8ecf2;
         }
-        .model-name {
+        .model-card .model-name {
             font-weight: 600;
-            font-size: 0.85rem;
-            min-width: 120px;
+            font-size: 0.8rem;
+            min-width: 70px;
             color: #1a1a1a;
             flex-shrink: 0;
         }
-        .model-row audio {
-            width: 200px;
-            height: 36px;
-            margin-left: 0.5rem;
+        .model-card audio {
+            flex: 1;
+            min-width: 80px;
+            height: 32px;
         }
+        /* 参考音频（Prompt 子集专用）保持原有样式 */
         .ref-audio-label {
             background: #d4e2ed;
             border-radius: 4px;
@@ -145,9 +158,22 @@
             margin-top: 0.5rem;
             text-align: center;
         }
-        @media (max-width: 700px) {
-            .model-name { min-width: 80px; font-size: 0.75rem; }
-            .model-row audio { width: 120px; }
+        /* 小屏适配：平板显示2列，手机显示1列 */
+        @media (max-width: 900px) {
+            .model-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .model-grid {
+                grid-template-columns: 1fr;
+            }
+            .model-card {
+                flex-wrap: wrap;
+            }
+            .model-card audio {
+                min-width: 120px;
+            }
         }
     </style>
 </head>
@@ -203,15 +229,18 @@
             <strong>📝 Caption:</strong><br>
             [A young adult male speaker in a neutral manner discusses creative methods in American English in a quiet indoor studio setting: "Tests here of colors, different goals. Zach really wanted the costume to feel ancient and broken down, so we're playing with that with our paint work here." Intermittent electronic music plays throughout, incorporating bass, drums, and synthesizer with dark, deep, and funny moods.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="overall/ref_audio/H6IUnmg1MVc_19_9_29_9.flac"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
-        <div class="model-row"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="overall/mova/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="overall/ovi/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
+        <!-- 网格布局替换原有的 model-row -->
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="overall/ref_audio/H6IUnmg1MVc_19_9_29_9.flac"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
+            <div class="model-card"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="overall/mova/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="overall/ovi/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
+        </div>
     </div>
 
     <!-- Sample 2 -->
@@ -221,15 +250,17 @@
             <strong>📝 Caption:</strong><br>
             [A middle-aged American man is neutrally conducting a vehicle review outdoors in American English: "Hello everyone. Today, we're going to take a quick walk around and look at this 2011 Jeep Wrangler Sport." Ambient traffic noise and wind continue throughout the recording with occasional microphone wind noise. The environment suggests an outdoor urban setting like a dealership or street.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="overall/ref_audio/K7vWsEQYzfg_10_61665_20_6166.flac"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
-        <div class="model-row"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="overall/mova/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="overall/ovi/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="overall/ref_audio/K7vWsEQYzfg_10_61665_20_6166.flac"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
+            <div class="model-card"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="overall/mova/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="overall/ovi/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/K7vWsEQYzfg_10_61665_20_6166.wav"></audio></div>
+        </div>
     </div>
 
     <!-- Sample 3 -->
@@ -239,15 +270,17 @@
             <strong>📝 Caption:</strong><br>
             [A young adult male with a US accent provides neutral-toned finger-snapping instructions in English: "Your middle finger. Step 3. Let your ring finger and pinky rest against your palm. Step 4. Now quickly, swipe your middle finger down so that it hits." Electronic pop music happy with synthesizer plays throughout. A finger snap occurs at the end. Recorded in an indoor studio environment.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="overall/ref_audio/Oo3cKxlkQZc_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/Oo3cKxlkQZc_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/Oo3cKxlkQZc_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/Oo3cKxlkQZc_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="overall/mova/Oo3cKxlkQZc_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="overall/ovi/Oo3cKxlkQZc_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/Oo3cKxlkQZc_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/Oo3cKxlkQZc_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/Oo3cKxlkQZc_30.wav"></audio></div>
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="overall/ref_audio/Oo3cKxlkQZc_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/Oo3cKxlkQZc_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/Oo3cKxlkQZc_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/Oo3cKxlkQZc_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="overall/mova/Oo3cKxlkQZc_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="overall/ovi/Oo3cKxlkQZc_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/Oo3cKxlkQZc_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/Oo3cKxlkQZc_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/Oo3cKxlkQZc_30.wav"></audio></div>
+        </div>
     </div>
 
     <!-- Sample 4 -->
@@ -257,15 +290,17 @@
             <strong>📝 Caption:</strong><br>
             [An elderly male narrator with a Scottish accent confidently spoke in English: "By ones and by twos. A raider infiltrates." The fearful electronic music played by drums and synthesizers ran through the entire background sound, accompanied by continuous cricket chirping, establishing an outdoor nighttime setting.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="overall/ref_audio/PljzqcsQ62U_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/PljzqcsQ62U_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/PljzqcsQ62U_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/PljzqcsQ62U_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="overall/mova/PljzqcsQ62U_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="overall/ovi/PljzqcsQ62U_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/PljzqcsQ62U_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/PljzqcsQ62U_30.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/PljzqcsQ62U_30.wav"></audio></div>
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="overall/ref_audio/PljzqcsQ62U_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/PljzqcsQ62U_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/PljzqcsQ62U_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/PljzqcsQ62U_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="overall/mova/PljzqcsQ62U_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="overall/ovi/PljzqcsQ62U_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/PljzqcsQ62U_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/PljzqcsQ62U_30.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/PljzqcsQ62U_30.wav"></audio></div>
+        </div>
     </div>
 
     <!-- Sample 5 -->
@@ -275,18 +310,20 @@
             <strong>📝 Caption:</strong><br>
             [Energetic rock music with guitar and drums in a fun mood accompanies the clip. Near the end, a whoosh sound effect occurs, captured in a studio environment.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="overall/ref_audio/vDpSpjmIog8_68_69030000000001_78_6903.flac"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
-        <div class="model-row"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="overall/mova/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="overall/ovi/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="overall/ref_audio/vDpSpjmIog8_68_69030000000001_78_6903.flac"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
+            <div class="model-card"><span class="model-name">JavisDiT++</span><audio controls src="overall/javisdit/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="overall/ltx2/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="overall/mova/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="overall/ovi/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="overall/uniavgen/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="overall/dasheng_fine/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
+        </div>
     </div>
 
-    <div class="note">* 展示 5 个样例，每个样例包含所有模型的生成音频。</div>
+    <div class="note">* 展示 5 个样例，每个样例包含所有模型的生成音频（每行 3 个）。</div>
 </div>
 
 <!-- ==================== PROMPT SET ==================== -->
@@ -308,11 +345,13 @@
         </p>
         <div style="margin-top: 0.5rem;">
             <div style="font-weight:600; margin-bottom:0.3rem;">Generated samples:</div>
-            <div class="model-row"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/8S7zsWndDfk_70.wav"></audio></div>
-            <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/8S7zsWndDfk_70.wav"></audio></div>
-            <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/8S7zsWndDfk_70.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/8S7zsWndDfk_70.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/8S7zsWndDfk_70.wav"></audio></div>
+            <div class="model-grid">
+                <div class="model-card"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/8S7zsWndDfk_70.wav"></audio></div>
+                <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/8S7zsWndDfk_70.wav"></audio></div>
+                <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/8S7zsWndDfk_70.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/8S7zsWndDfk_70.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/8S7zsWndDfk_70.wav"></audio></div>
+            </div>
         </div>
     </div>
 
@@ -331,11 +370,13 @@
         </p>
         <div style="margin-top: 0.5rem;">
             <div style="font-weight:600; margin-bottom:0.3rem;">Generated samples:</div>
-            <div class="model-row"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/BRhvg3c0Jq4_30.wav"></audio></div>
-            <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/BRhvg3c0Jq4_30.wav"></audio></div>
-            <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/BRhvg3c0Jq4_30.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/BRhvg3c0Jq4_30.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/BRhvg3c0Jq4_30.wav"></audio></div>
+            <div class="model-grid">
+                <div class="model-card"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/BRhvg3c0Jq4_30.wav"></audio></div>
+                <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/BRhvg3c0Jq4_30.wav"></audio></div>
+                <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/BRhvg3c0Jq4_30.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/BRhvg3c0Jq4_30.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/BRhvg3c0Jq4_30.wav"></audio></div>
+            </div>
         </div>
     </div>
 
@@ -354,11 +395,13 @@
         </p>
         <div style="margin-top: 0.5rem;">
             <div style="font-weight:600; margin-bottom:0.3rem;">Generated samples:</div>
-            <div class="model-row"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/F7UpJnEONHk_30.wav"></audio></div>
-            <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/F7UpJnEONHk_30.wav"></audio></div>
-            <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/F7UpJnEONHk_30.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/F7UpJnEONHk_30.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/F7UpJnEONHk_30.wav"></audio></div>
+            <div class="model-grid">
+                <div class="model-card"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/F7UpJnEONHk_30.wav"></audio></div>
+                <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/F7UpJnEONHk_30.wav"></audio></div>
+                <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/F7UpJnEONHk_30.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/F7UpJnEONHk_30.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/F7UpJnEONHk_30.wav"></audio></div>
+            </div>
         </div>
     </div>
 
@@ -377,11 +420,13 @@
         </p>
         <div style="margin-top: 0.5rem;">
             <div style="font-weight:600; margin-bottom:0.3rem;">Generated samples:</div>
-            <div class="model-row"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/Y6i5eQOpFk_U.wav"></audio></div>
-            <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/Y6i5eQOpFk_U.wav"></audio></div>
-            <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/Y6i5eQOpFk_U.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/Y6i5eQOpFk_U.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/Y6i5eQOpFk_U.wav"></audio></div>
+            <div class="model-grid">
+                <div class="model-card"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/Y6i5eQOpFk_U.wav"></audio></div>
+                <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/Y6i5eQOpFk_U.wav"></audio></div>
+                <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/Y6i5eQOpFk_U.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/Y6i5eQOpFk_U.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/Y6i5eQOpFk_U.wav"></audio></div>
+            </div>
         </div>
     </div>
 
@@ -400,15 +445,17 @@
         </p>
         <div style="margin-top: 0.5rem;">
             <div style="font-weight:600; margin-bottom:0.3rem;">Generated samples:</div>
-            <div class="model-row"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/YHdxfbpnd2-8.wav"></audio></div>
-            <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/YHdxfbpnd2-8.wav"></audio></div>
-            <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/YHdxfbpnd2-8.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/YHdxfbpnd2-8.wav"></audio></div>
-            <div class="model-row"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/YHdxfbpnd2-8.wav"></audio></div>
+            <div class="model-grid">
+                <div class="model-card"><span class="model-name">GT</span><audio controls src="prompt/ref_audio/YHdxfbpnd2-8.wav"></audio></div>
+                <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="prompt/AuDirector/YHdxfbpnd2-8.wav"></audio></div>
+                <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="prompt/uniavgen/YHdxfbpnd2-8.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="prompt/dasheng_fine/YHdxfbpnd2-8.wav"></audio></div>
+                <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="prompt/ming_16b/YHdxfbpnd2-8.wav"></audio></div>
+            </div>
         </div>
     </div>
 
-    <div class="note">* 展示 5 个样例，包含参考音频和选定模型的生成结果。</div>
+    <div class="note">* 展示 5 个样例，包含参考音频和选定模型的生成结果（每行 3 个）。</div>
 </div>
 
 <!-- ==================== TIMESTAMP SET ==================== -->
@@ -420,15 +467,17 @@
         <div class="sample-id">📌 Sample #1</div>
         <div class="caption-box">
             <strong>📝 Timestamped Caption:</strong><br>
-            [From 0.90s to 1.15s, a dog barked. Around 4.90s to 5.14s, the dog barked again. A female speaker aged 30-40 in a neutral state stated in US English, from 5.50s to 6.90s, she said:\" You can hang out in here and hide.\" From 6.9s to 7.3s, overlapping the end of speech, the dog barked again. From 8.60s to 9.20s, the dog barked once more. Throughout the recording, a slight echo persisted as background.]
+            [From 0.90s to 1.15s, a dog barked. Around 4.90s to 5.14s, the dog barked again. A female speaker aged 30-40 in a neutral state stated in US English, from 5.50s to 6.90s, she said:" You can hang out in here and hide." From 6.9s to 7.3s, overlapping the end of speech, the dog barked again. From 8.60s to 9.20s, the dog barked once more. Throughout the recording, a slight echo persisted as background.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/GdNA7R-lpdE_55.wav"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/GdNA7R-lpdE_55.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/GdNA7R-lpdE_55.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/GdNA7R-lpdE_55.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/GdNA7R-lpdE_55.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/GdNA7R-lpdE_55.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/GdNA7R-lpdE_55.wav"></audio></div>
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/GdNA7R-lpdE_55.wav"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/GdNA7R-lpdE_55.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/GdNA7R-lpdE_55.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/GdNA7R-lpdE_55.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/GdNA7R-lpdE_55.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/GdNA7R-lpdE_55.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/GdNA7R-lpdE_55.wav"></audio></div>
+        </div>
     </div>
 
     <!-- Sample 2 -->
@@ -436,15 +485,17 @@
         <div class="sample-id">📌 Sample #2</div>
         <div class="caption-box">
             <strong>📝 Timestamped Caption:</strong><br>
-            [From 0.18 to 0.97s, a young female speaker spoke fearfully in British English:\"Oh dear, someone's.\".  From 2.11 to 10.00s, terrifying electronic music with a synthesizer playing. From 5.00 to 8.87 seconds, she continued:\"Someone's been messing up the shit round here. Oh, here he is!\" The environment suggests a controlled indoor setting with minimal background interference.]
+            [From 0.18 to 0.97s, a young female speaker spoke fearfully in British English:"Oh dear, someone's.".  From 2.11 to 10.00s, terrifying electronic music with a synthesizer playing. From 5.00 to 8.87 seconds, she continued:"Someone's been messing up the shit round here. Oh, here he is!" The environment suggests a controlled indoor setting with minimal background interference.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/H61TyC6jhEM_460.wav"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/H61TyC6jhEM_460.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/H61TyC6jhEM_460.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/H61TyC6jhEM_460.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/H61TyC6jhEM_460.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/H61TyC6jhEM_460.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/H61TyC6jhEM_460.wav"></audio></div>
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/H61TyC6jhEM_460.wav"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/H61TyC6jhEM_460.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/H61TyC6jhEM_460.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/H61TyC6jhEM_460.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/H61TyC6jhEM_460.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/H61TyC6jhEM_460.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/H61TyC6jhEM_460.wav"></audio></div>
+        </div>
     </div>
 
     <!-- Sample 3 -->
@@ -452,15 +503,17 @@
         <div class="sample-id">📌 Sample #3</div>
         <div class="caption-box">
             <strong>📝 Timestamped Caption:</strong><br>
-            [A middle-aged American woman speaks neutrally in an indoor craft setting from 3.91 to 5.66s: \" And then you end up with a nice fluffy rug.\" From 7.26 to 10.00 seconds, she continues \"These work great as bathroom rugs, or if you want a larger rug,\". Prior to this, 0.0 to 2.96 seconds feature rustling fabric throughout and a sewing machine starting from 1.28 to 2.96 seconds. Indoor ambience spans the entire recording.]
+            [A middle-aged American woman speaks neutrally in an indoor craft setting from 3.91 to 5.66s: " And then you end up with a nice fluffy rug." From 7.26 to 10.00 seconds, she continues "These work great as bathroom rugs, or if you want a larger rug,". Prior to this, 0.0 to 2.96 seconds feature rustling fabric throughout and a sewing machine starting from 1.28 to 2.96 seconds. Indoor ambience spans the entire recording.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/LjTQA8G6hoQ_130.wav"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/LjTQA8G6hoQ_130.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/LjTQA8G6hoQ_130.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/LjTQA8G6hoQ_130.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/LjTQA8G6hoQ_130.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/LjTQA8G6hoQ_130.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/LjTQA8G6hoQ_130.wav"></audio></div>
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/LjTQA8G6hoQ_130.wav"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/LjTQA8G6hoQ_130.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/LjTQA8G6hoQ_130.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/LjTQA8G6hoQ_130.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/LjTQA8G6hoQ_130.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/LjTQA8G6hoQ_130.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/LjTQA8G6hoQ_130.wav"></audio></div>
+        </div>
     </div>
 
     <!-- Sample 4 -->
@@ -468,15 +521,17 @@
         <div class="sample-id">📌 Sample #4</div>
         <div class="caption-box">
             <strong>📝 Timestamped Caption:</strong><br>
-            [At the beginning, a deep ominous music with low-frequency reverberation starts and continues throughout. From 0.00s to 3.54s, a middle-aged male speaker with a US accent calmly states, \"That's my inspiration to riding in the backcountry.\" From 3.54s to 8.28s, the deep timpani percussion occured. The entire recording suggests an open outdoor setting.]
+            [At the beginning, a deep ominous music with low-frequency reverberation starts and continues throughout. From 0.00s to 3.54s, a middle-aged male speaker with a US accent calmly states, "That's my inspiration to riding in the backcountry." From 3.54s to 8.28s, the deep timpani percussion occured. The entire recording suggests an open outdoor setting.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/O_8C1feaFac_200.wav"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/O_8C1feaFac_200.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/O_8C1feaFac_200.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/O_8C1feaFac_200.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/O_8C1feaFac_200.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/O_8C1feaFac_200.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/O_8C1feaFac_200.wav"></audio></div>
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/O_8C1feaFac_200.wav"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/O_8C1feaFac_200.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/O_8C1feaFac_200.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/O_8C1feaFac_200.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/O_8C1feaFac_200.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/O_8C1feaFac_200.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/O_8C1feaFac_200.wav"></audio></div>
+        </div>
     </div>
 
     <!-- Sample 5 -->
@@ -484,18 +539,20 @@
         <div class="sample-id">📌 Sample #5</div>
         <div class="caption-box">
             <strong>📝 Timestamped Caption:</strong><br>
-            [Throughout the recording: slow-tempo cello music with sad tones. From 2.415s to 3.58s, a young British man with a British accent spoke neutrally in English:\"It's less obvious than going.\" From 5.50s to 8.10s, he said: \"You know, you just kind of smooth the edges out there.\" Set in a quiet indoor environment with clear audio quality throughout.]
+            [Throughout the recording: slow-tempo cello music with sad tones. From 2.415s to 3.58s, a young British man with a British accent spoke neutrally in English:"It's less obvious than going." From 5.50s to 8.10s, he said: "You know, you just kind of smooth the edges out there." Set in a quiet indoor environment with clear audio quality throughout.]
         </div>
-        <div class="model-row"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/Qsvip_fmYps_454.wav"></audio></div>
-        <div class="model-row"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/Qsvip_fmYps_454.wav"></audio></div>
-        <div class="model-row"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/Qsvip_fmYps_454.wav"></audio></div>
-        <div class="model-row"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/Qsvip_fmYps_454.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/Qsvip_fmYps_454.wav"></audio></div>
-        <div class="model-row"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/Qsvip_fmYps_454.wav"></audio></div>
-        <div class="model-row"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/Qsvip_fmYps_454.wav"></audio></div>
+        <div class="model-grid">
+            <div class="model-card"><span class="model-name">GT</span><audio controls src="timestamp/ref_audio/Qsvip_fmYps_454.wav"></audio></div>
+            <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="timestamp/AuDirector/Qsvip_fmYps_454.wav"></audio></div>
+            <div class="model-card"><span class="model-name">LTX‑2</span><audio controls src="timestamp/ltx2/Qsvip_fmYps_454.wav"></audio></div>
+            <div class="model-card"><span class="model-name">MOVA</span><audio controls src="timestamp/mova/Qsvip_fmYps_454.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Ovi</span><audio controls src="timestamp/ovi/Qsvip_fmYps_454.wav"></audio></div>
+            <div class="model-card"><span class="model-name">UniAVGen</span><audio controls src="timestamp/uniavgen/Qsvip_fmYps_454.wav"></audio></div>
+            <div class="model-card"><span class="model-name">Dasheng‑Fine</span><audio controls src="timestamp/dasheng_fine/Qsvip_fmYps_454.wav"></audio></div>
+        </div>
     </div>
 
-    <div class="note">* 展示 5 个样例，每个样例包含所有模型的生成音频。</div>
+    <div class="note">* 展示 5 个样例，每个样例包含所有模型的生成音频（每行 3 个）。</div>
 </div>
 
 <!-- Footer -->
