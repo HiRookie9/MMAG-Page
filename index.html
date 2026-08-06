@@ -40,30 +40,43 @@
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 0.4rem;
         }
-        .sample-block {
-            border: 1px solid #e2e6ec;
+        /* 纵向排列的图片容器 — 每张图占一行 */
+        .figure-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+        .figure-item {
+            background: #f5f7fa;
             border-radius: 8px;
-            padding: 1rem 1.2rem;
-            margin-top: 1.5rem;
-            background: #f9fafc;
+            padding: 1rem;
+            border: 1px solid #e2e6ec;
+            text-align: center;
         }
-        .sample-block .sample-id {
-            font-weight: 600;
+        .figure-item .figure-placeholder {
+            background: #e8ecf1;
+            border-radius: 6px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
             font-size: 0.9rem;
-            color: #1a6b8a;
-            margin-bottom: 0.4rem;
+            border: 2px dashed #ccc;
+            margin-bottom: 0.6rem;
         }
-        .caption-box {
-            background: #f7f9fc;
-            border-left: 4px solid #1a6b8a;
-            padding: 0.6rem 1rem;
-            margin: 0.4rem 0 0.8rem 0;
-            border-radius: 4px;
-            font-style: italic;
-            color: #2c3e50;
+        .figure-item .figure-title {
+            font-weight: 600;
             font-size: 0.95rem;
+            color: #1a1a1a;
+            margin-bottom: 0.2rem;
         }
-        /* 🟢 新增：模型网格布局 — 每行 3 个卡片 */
+        .figure-item .figure-caption {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        /* 模型网格布局 — 每行 3 个卡片 */
         .model-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -97,7 +110,29 @@
             min-width: 80px;
             height: 32px;
         }
-        /* 参考音频（Prompt 子集专用）保持原有样式 */
+        .sample-block {
+            border: 1px solid #e2e6ec;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin-top: 1.5rem;
+            background: #f9fafc;
+        }
+        .sample-block .sample-id {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1a6b8a;
+            margin-bottom: 0.4rem;
+        }
+        .caption-box {
+            background: #f7f9fc;
+            border-left: 4px solid #1a6b8a;
+            padding: 0.6rem 1rem;
+            margin: 0.4rem 0 0.8rem 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
         .ref-audio-label {
             background: #d4e2ed;
             border-radius: 4px;
@@ -158,22 +193,18 @@
             margin-top: 0.5rem;
             text-align: center;
         }
-        /* 小屏适配：平板显示2列，手机显示1列 */
+        .caption-placeholder {
+            color: #999;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
         @media (max-width: 900px) {
-            .model-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .model-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 600px) {
-            .model-grid {
-                grid-template-columns: 1fr;
-            }
-            .model-card {
-                flex-wrap: wrap;
-            }
-            .model-card audio {
-                min-width: 120px;
-            }
+            .model-grid { grid-template-columns: 1fr; }
+            .model-card { flex-wrap: wrap; }
+            .model-card audio { min-width: 120px; }
         }
     </style>
 </head>
@@ -182,9 +213,9 @@
 <h1>🎵 MMAG</h1>
 <div class="subtitle">Multi‑Control Mixed Audio Generation Benchmark · Anonymous</div>
 
-<!-- Overview -->
+<!-- ==================== INTRODUCTION ==================== -->
 <div class="section">
-    <h2>📄 Overview</h2>
+    <h2>📄 Introduction</h2>
     <p>
         <strong>MMAG</strong> is a comprehensive benchmark for evaluating mixed audio generation under multiple control conditions.
         It consists of a <strong>Main Set</strong> for holistic evaluation, along with two dedicated subsets for
@@ -196,9 +227,47 @@
         <br>
         <a class="hf-link" href="YOUR_HF_DATASET_LINK" target="_blank">🤗 View on Hugging Face</a>
     </p>
+
+    <!-- ========== 第一张图：Intro 下面 ========== -->
+    <div style="margin-top: 1.5rem;">
+        <div class="figure-item">
+            <img src="images/intro.png" alt="Comparisons with Other Benchmarks" style="width:100%; border-radius:6px;">
+            </div>
+            <div class="figure-title">Comparisons with Other Benchmarks</div>
+            <div class="figure-caption">
+                <span class="caption-placeholder">Comparison of MMAG with existing benchmarks. Domain columns indicate the audio categories covered. Condition columns indicate the types of annotations or control signals provided. </span>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Statistics -->
+<!-- ==================== CONSTRUCTION ==================== -->
+<div class="section">
+    <h2>🔧 Construction</h2>
+    <p>
+        <!-- 这里可以放一些 Construction 相关的文字描述，留空也可以 -->
+    </p>
+
+    <!-- ========== 第二张图 ========== -->
+    <div class="figure-item">
+        <img src="images/pipe.png" alt="Comparisons with Other Benchmarks" style="width:100%; border-radius:6px;">
+        <div class="figure-title">Annotation Pipeline</div>
+        <div class="figure-caption">
+            <span class="caption-placeholder">Overview of the MMAG annotation pipeline. Expert models extract fine-grained semantic, speaker, and temporal attributes from audio clips. An LLM aggregates these annotations into coherent overall and timestamped captions, while speech segments are further processed to construct voice prompts for voice cloning evaluation. Human inspection is performed to ensure annotation accuracy and quality.</span>
+        </div>
+    </div>
+
+    <!-- ========== 第三张图 ========== -->
+    <div class="figure-item" style="margin-top: 1.5rem;">
+        <img src="images/caps.png" alt="Comparisons with Other Benchmarks" style="width:100%; border-radius:6px;">
+        <div class="figure-title">Caption Example Comparison</div>
+        <div class="figure-caption">
+            <span class="caption-placeholder">Illustration of the two caption types in MMAG for the same audio clip. Overall captions provide a holistic description of speech, sound events, and music with their relative temporal relationships, while timestamped captions additionally specify fine-grained temporal boundaries for speech segments and foreground sound events.</span>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== STATISTICS ==================== -->
 <div class="section">
     <h2>📊 Benchmark Statistics</h2>
     <div class="dataset-stats">
@@ -218,6 +287,8 @@
     </p>
 </div>
 
+<!-- ==================== AUDIO SAMPLES ==================== -->
+
 <!-- ==================== MAIN SET ==================== -->
 <div class="section">
     <h2>🎧 Main Set – Holistic Generation</h2>
@@ -229,7 +300,6 @@
             <strong>📝 Caption:</strong><br>
             [A young adult male speaker in a neutral manner discusses creative methods in American English in a quiet indoor studio setting: "Tests here of colors, different goals. Zach really wanted the costume to feel ancient and broken down, so we're playing with that with our paint work here." Intermittent electronic music plays throughout, incorporating bass, drums, and synthesizer with dark, deep, and funny moods.]
         </div>
-        <!-- 网格布局替换原有的 model-row -->
         <div class="model-grid">
             <div class="model-card"><span class="model-name">GT</span><audio controls src="overall/ref_audio/H6IUnmg1MVc_19_9_29_9.flac"></audio></div>
             <div class="model-card"><span class="model-name">AuDirector</span><audio controls src="overall/AuDirector/H6IUnmg1MVc_19_9_29_9.wav"></audio></div>
@@ -322,7 +392,6 @@
             <div class="model-card"><span class="model-name">Ming‑16.8B</span><audio controls src="overall/ming_16b/vDpSpjmIog8_68_69030000000001_78_6903.wav"></audio></div>
         </div>
     </div>
-
     <div class="note">* 展示 5 个样例，每个样例包含所有模型的生成音频（每行 3 个）。</div>
 </div>
 
