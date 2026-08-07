@@ -186,6 +186,14 @@
             font-style: italic;
             font-size: 0.85rem;
         }
+        /* 表格数据列居中，Model 列左对齐 */
+        table.dataTable tbody td:not(:first-child) {
+            text-align: center;
+        }
+        /* 表头指标列居中 */
+        table.dataTable thead th:not(:first-child) {
+            text-align: center;
+        }
         /* DataTables 适配 */
         .table-wrapper { overflow-x: auto; }
         table.dataTable thead th { border-bottom: 2px solid #ddd; font-weight: 600; }
@@ -676,7 +684,7 @@
                     <th>PC↑</th>
                     <th>PQ↑</th>
                     <th>WER↓</th>
-                    <th>UTMOS↑</th>
+                    <th>UTMOS<sub>v2</sub>↑</th>
                     <th>CLAP↑</th>
                     <th>AAJ↑</th>
                 </tr>
@@ -723,7 +731,7 @@
                     <th>PQ↑</th>
                     <th>WER↓</th>
                     <th>SPK‑SIM↑</th>
-                    <th>UTMOS↑</th>
+                    <th>UTMOS<sub>v2</sub>↑</th>
                     <th>CLAP↑</th>
                     <th>AAJ↑</th>
                 </tr>
@@ -765,7 +773,7 @@
                     <th>PC↑</th>
                     <th>PQ↑</th>
                     <th>WER↓</th>
-                    <th>UTMOS↑</th>
+                    <th>UTMOS<sub>v2</sub>↑</th>
                     <th>CLAP↑</th>
                     <th>AAJ↑</th>
                     <th>Speech<sub>F1</sub>↑</th>
