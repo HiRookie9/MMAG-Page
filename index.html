@@ -213,6 +213,7 @@
 </head>
 <body>
 
+
 <h1>🎵 MMAG</h1>
 <div class="subtitle">A Multi‑Control Mixed Audio Generation Benchmark</div>
 
@@ -662,17 +663,17 @@
 
 </div>
 
-<!-- ==================== RESULTS: MAIN SET ==================== -->
+<!-- ==================== MAIN SET ==================== -->
 <div class="section">
     <h2>📊 Main Set Results</h2>
     <p style="font-size:0.9rem; color:#555; margin-top:-0.2rem;">
-        Click any column header to sort. 
+        Click any column header to sort. Click <strong>Model</strong> to reset to default order.
     </p>
     <div class="table-wrapper">
         <table id="mainTable" class="display" style="width:100%;">
             <thead>
                 <tr>
-                    <th rowspan="2" style="text-align:center;">Model</th>
+                    <th rowspan="2" style="text-align:center;" id="model-header">Model</th>
                     <th colspan="5" style="text-align:center;">Acoustic</th>
                     <th colspan="2" style="text-align:center;">Speech</th>
                     <th colspan="2" style="text-align:center;">Semantic</th>
@@ -690,7 +691,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- 数据严格按照您给出的顺序 -->
                 <tr><td>AuDirector</td><td>5.19</td><td>1.60</td><td>2.62</td><td>3.69</td><td>6.71</td><td>0.08</td><td>2.68</td><td>0.34</td><td>0.76</td></tr>
                 <tr><td>LTX-2</td><td>2.89</td><td>1.31</td><td>2.90</td><td>3.04</td><td>7.22</td><td>0.04</td><td>2.90</td><td>0.34</td><td>0.76</td></tr>
                 <tr><td>Ovi</td><td>3.91</td><td>1.50</td><td>2.06</td><td>2.60</td><td>6.05</td><td>0.13</td><td>2.25</td><td>0.30</td><td>0.74</td></tr>
@@ -708,7 +708,8 @@
         ↑ / ↓ indicate better direction. Click <strong>Model</strong> to reset order.
     </p>
 </div>
-<!-- ==================== VOICE CLONING SET RESULTS ==================== -->
+
+<!-- ==================== VOICE CLONING SET ==================== -->
 <div class="section">
     <h2>🎤 Voice Cloning Set Results</h2>
     <p style="font-size:0.9rem; color:#555; margin-top:-0.2rem;">
@@ -737,7 +738,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- 数据严格按照您给出的顺序 -->
                 <tr><td>AuDirector</td><td>3.80</td><td>2.11</td><td>2.61</td><td>3.54</td><td>5.56</td><td>0.10</td><td>0.72</td><td>2.32</td><td>0.35</td><td>0.75</td></tr>
                 <tr><td>UniAVGen</td><td>6.70</td><td>2.58</td><td>1.58</td><td>3.28</td><td>5.84</td><td>0.28</td><td>0.67</td><td>2.40</td><td>0.26</td><td>0.70</td></tr>
                 <tr><td>Ming-Omni-TTS-0.5B</td><td>8.72</td><td>3.32</td><td>1.26</td><td>1.81</td><td>6.54</td><td>0.06</td><td>0.76</td><td>2.85</td><td>0.26</td><td>0.66</td></tr>
@@ -746,15 +746,15 @@
         </table>
     </div>
     <p style="font-size:0.85rem; color:#888; margin-top:0.3rem;">
-        ↑ / ↓ indicate better direction.
+        ↑ / ↓ indicate better direction. Click <strong>Model</strong> to reset order.
     </p>
 </div>
 
-<!-- ==================== TIMESTAMP SET RESULTS ==================== -->
+<!-- ==================== TIMESTAMP SET ==================== -->
 <div class="section">
     <h2>⏱️ Timestamp Set Results</h2>
     <p style="font-size:0.9rem; color:#555; margin-top:-0.2rem;">
-        Click any column header to sort.
+        Click any column header to sort. Click <strong>Model</strong> to reset to default order.
     </p>
     <div class="table-wrapper">
         <table id="timestampTable" class="display" style="width:100%;">
@@ -781,7 +781,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- 数据严格按照您给出的顺序 -->
                 <tr><td>AuDirector</td><td>6.59</td><td>2.01</td><td>3.08</td><td>4.16</td><td>6.19</td><td>0.15</td><td>2.31</td><td>0.35</td><td>0.78</td><td>0.72</td><td>0.57</td></tr>
                 <tr><td>LTX-2</td><td>2.38</td><td>1.46</td><td>3.35</td><td>3.35</td><td>6.97</td><td>0.05</td><td>2.74</td><td>0.33</td><td>0.77</td><td>0.64</td><td>0.44</td></tr>
                 <tr><td>Ovi</td><td>3.99</td><td>1.67</td><td>2.23</td><td>2.74</td><td>6.05</td><td>0.19</td><td>2.12</td><td>0.27</td><td>0.78</td><td>0.65</td><td>0.39</td></tr>
@@ -793,36 +792,34 @@
         </table>
     </div>
     <p style="font-size:0.85rem; color:#888; margin-top:0.3rem;">
-        ↑ / ↓ indicate better direction.
+        ↑ / ↓ indicate better direction. Click <strong>Model</strong> to reset order.
     </p>
 </div>
 
-<!-- ==================== Footer ==================== -->
+<!-- Footer -->
 <div class="footer">
     MMAG
 </div>
 
-<!-- ==================== DataTables 初始化 ==================== -->
 <script>
 $(document).ready(function() {
+    // Main Set
     var table = $('#mainTable').DataTable({
         searching: false,
         paging: false,
         info: false,
         order: [],
         columnDefs: [
-            { targets: [0], orderable: false },            // Model 列禁用排序
+            { targets: [0], orderable: false },
             { targets: [3,4,5,7,8,9], orderSequence: ['desc','asc'] },
             { targets: [1,2,6], orderSequence: ['asc','desc'] }
         ]
     });
-
-    // 通过 ID 绑定点击事件，重置排序
     $('#model-header').on('click', function() {
         table.order([]).draw();
     });
-});
-    // ========== Voice Cloning Set ==========
+
+    // Voice Cloning Set
     var voiceTable = $('#voiceTable').DataTable({
         searching: false,
         paging: false,
@@ -837,8 +834,8 @@ $(document).ready(function() {
     $('#voice-model-header').on('click', function() {
         voiceTable.order([]).draw();
     });
-});
 
+    // Timestamp Set
     var timestampTable = $('#timestampTable').DataTable({
         searching: false,
         paging: false,
@@ -846,19 +843,16 @@ $(document).ready(function() {
         order: [],
         columnDefs: [
             { targets: [0], orderable: false },
-            // 指标列：↑ 默认降序（好→坏），↓ 默认升序（好→坏）
-            // IS(3), PC(4), PQ(5), UTMOS(7), CLAP(8), AAJ(9), Speech_F1(10), Sound_F1(11)
-            { targets: [3, 4, 5, 7, 8, 9, 10, 11], orderSequence: ['desc', 'asc'] },
-            // FD(1), KL(2), WER(6)
-            { targets: [1, 2, 6], orderSequence: ['asc', 'desc'] }
+            { targets: [3,4,5,7,8,9,10,11], orderSequence: ['desc','asc'] },
+            { targets: [1,2,6], orderSequence: ['asc','desc'] }
         ]
     });
-
-    // 点击 Model 列头重置排序
     $('#timestamp-model-header').on('click', function() {
         timestampTable.order([]).draw();
     });
+});
 </script>
 
 </body>
 </html>
+
