@@ -656,10 +656,10 @@
         <table id="mainTable" class="display" style="width:100%;">
             <thead>
                 <tr>
-                    <th rowspan="2">Model</th>
-                    <th colspan="5">Acoustic</th>
-                    <th colspan="2">Speech</th>
-                    <th colspan="2">Semantic</th>
+                    <th rowspan="2" style="text-align:center;">Model</th>
+                    <th colspan="5" style="text-align:center;">Acoustic</th>
+                    <th colspan="2" style="text-align:center;">Speech</th>
+                    <th colspan="2" style="text-align:center;">Semantic</th>
                 </tr>
                 <tr>
                     <th>FD↓</th>
@@ -700,32 +700,25 @@
 
 <!-- ==================== DataTables 初始化 ==================== -->
 <script>
-    $(document).ready(function() {
-        var table = $('#mainTable').DataTable({
-            // 关闭搜索和分页（10行数据，不需要）
-            searching: false,
-            paging: false,
-            info: false,
-            // 默认不排序，保留原始顺序
-            order: [],
-            // 列定义
-            columnDefs: [
-                // Model 列（索引0）：禁用排序，但点击它我们手动重置
-                { targets: [0], orderable: false },
-                // 对于 ↑ 指标（IS, PC, PQ, UTMOS, CLAP, AAJ）默认降序（好→坏）
-                // 索引：3-IS, 4-PC, 5-PQ, 7-UTMOS, 8-CLAP, 9-AAJ
-                { targets: [3, 4, 5, 7, 8, 9], orderSequence: [ 'desc', 'asc' ] },
-                // 对于 ↓ 指标（FD, KL, WER）默认升序（好→坏）
-                // 索引：1-FD, 2-KL, 6-WER
-                { targets: [1, 2, 6], orderSequence: [ 'asc', 'desc' ] }
-            ]
-        });
-
-        // 点击 Model 列头（索引0）重置排序为默认顺序
-        $('#mainTable thead th').eq(0).on('click', function() {
-            table.order([]).draw();   // 清空排序，回到原始顺序
-        });
+$(document).ready(function() {
+    var table = $('#mainTable').DataTable({
+        searching: false,
+        paging: false,
+        info: false,
+        order: [],                     // 保持原始顺序
+        columnDefs: [
+            { targets: [0], orderable: false },              // Model 列不可排序
+            { targets: [3,4,5,7,8,9], orderSequence: ['desc','asc'] }, // ↑ 指标
+            { targets: [1,2,6], orderSequence: ['asc','desc'] }        // ↓ 指标
+        ]
     });
+
+    // 点击第二行的 Model 列头（索引0）重置排序
+    $('#mainTable thead tr:eq(1) th:eq(0)').on('click', function(e) {
+        e.preventDefault();
+        table.order([]).draw();
+    });
+});
 </script>
 
 </body>
