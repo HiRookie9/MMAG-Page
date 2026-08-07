@@ -705,17 +705,16 @@ $(document).ready(function() {
         searching: false,
         paging: false,
         info: false,
-        order: [],                     // 保持原始顺序
+        order: [],
         columnDefs: [
-            { targets: [0], orderable: false },              // Model 列不可排序
-            { targets: [3,4,5,7,8,9], orderSequence: ['desc','asc'] }, // ↑ 指标
-            { targets: [1,2,6], orderSequence: ['asc','desc'] }        // ↓ 指标
+            { targets: [0], orderable: false },            // Model 列禁用排序
+            { targets: [3,4,5,7,8,9], orderSequence: ['desc','asc'] },
+            { targets: [1,2,6], orderSequence: ['asc','desc'] }
         ]
     });
 
-    // 点击第二行的 Model 列头（索引0）重置排序
-    $('#mainTable thead tr:eq(1) th:eq(0)').on('click', function(e) {
-        e.preventDefault();
+    // 通过 ID 绑定点击事件，重置排序
+    $('#model-header').on('click', function() {
         table.order([]).draw();
     });
 });
