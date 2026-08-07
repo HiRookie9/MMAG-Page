@@ -14,14 +14,42 @@
             color: #1a1a1a;
             background-color: #fafafa;
         }
-        h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.2rem; color: #000; }
+        h1 { 
+            font-size: 2.5rem; 
+            font-weight: 600; 
+            margin-bottom: 0.2rem; 
+            color: #000;
+            text-align: center;   /* 标题居中 */
+        }
         .subtitle {
             font-size: 1.2rem;
             color: #555;
             margin-top: 0.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.2rem;  /* 减小与作者信息的间距 */
             border-bottom: 2px solid #eaeaea;
             padding-bottom: 0.8rem;
+            text-align: center;     /* 副标题居中 */
+        }
+        /* 作者信息区块：无背景、无边框、无内边距，仅居中 */
+        .author-block {
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0.2rem 0 1.8rem 0;  /* 上下间距调整 */
+        }
+        .author-block .names {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.1rem;
+        }
+        .author-block .affiliations {
+            font-size: 0.85rem;
+            color: #555;
+        }
+        .author-block .email {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.2rem;
         }
         .section {
             background: white;
@@ -40,7 +68,6 @@
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 0.4rem;
         }
-        /* 纵向排列的图片容器 — 每张图占一行 */
         .figure-vertical {
             display: flex;
             flex-direction: column;
@@ -76,7 +103,6 @@
             font-size: 0.85rem;
             color: #666;
         }
-        /* 模型网格布局 — 每行 3 个卡片 */
         .model-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -212,25 +238,18 @@
 
 <h1>🎵 MMAG</h1>
 <div class="subtitle">Multi‑Control Mixed Audio Generation Benchmark</div>
-<div style="
-    background: #f5f7fa; 
-    border-radius: 12px; 
-    padding: 1.2rem 1.5rem; 
-    margin: 1.5rem 0 2rem 0;
-    border: 1px solid #e2e6ec;
-    text-align: center;
-    font-size: 0.95rem;
-    line-height: 1.6;
-">
-    <div style="font-weight: 500; font-size: 1rem; margin-bottom: 0.2rem;">
+
+<!-- 作者信息：无方块包裹，仅居中显示 -->
+<div class="author-block">
+    <div class="names">
         Zihao Zheng<sup>1,2</sup> · Xuenan Xu<sup>2</sup> · Jiahao Mei<sup>1</sup> · Yixuan Li<sup>1,2</sup> ·
         Minghao Lv<sup>1</sup> · Wen Wu<sup>2</sup> · Chao Zhang<sup>2</sup> · Mengyue Wu<sup>1</sup>
     </div>
-    <div style="font-size: 0.85rem; color: #555; margin-top: 0.1rem;">
+    <div class="affiliations">
         <sup>1</sup> MoE Key Lab of Artificial Intelligence, X‑LANCE Lab, Shanghai Jiao Tong University, China &nbsp;·&nbsp;
         <sup>2</sup> Shanghai AI Lab, China
     </div>
-    <div style="font-size: 0.85rem; color: #666; margin-top: 0.3rem;">
+    <div class="email">
         📧 rookie9@sjtu.edu.cn · mengyuewu@sjtu.edu.cn
     </div>
 </div>
