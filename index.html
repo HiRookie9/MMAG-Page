@@ -19,23 +19,22 @@
             font-weight: 600; 
             margin-bottom: 0.2rem; 
             color: #000;
-            text-align: center;   /* 标题居中 */
+            text-align: center;
         }
         .subtitle {
             font-size: 1.2rem;
             color: #555;
             margin-top: 0.2rem;
-            margin-bottom: 1.2rem;  /* 减小与作者信息的间距 */
-            border-bottom: 2px solid #eaeaea;
-            padding-bottom: 0.8rem;
-            text-align: center;     /* 副标题居中 */
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.4rem;
+            text-align: center;
+            /* border-bottom 已移除 */
         }
-        /* 作者信息区块：无背景、无边框、无内边距，仅居中 */
         .author-block {
             text-align: center;
             font-size: 0.95rem;
             line-height: 1.6;
-            margin: 0.2rem 0 1.8rem 0;  /* 上下间距调整 */
+            margin: 0.2rem 0 0.6rem 0;  /* 下边距减小，紧贴图标栏 */
         }
         .author-block .names {
             font-weight: 500;
@@ -50,6 +49,30 @@
             font-size: 0.85rem;
             color: #666;
             margin-top: 0.2rem;
+        }
+        /* 新增图标链接栏 */
+        .icon-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 0.2rem 0 2rem 0;
+            font-size: 0.95rem;
+        }
+        .icon-links a {
+            color: #1a6b8a;
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+            transition: border-color 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .icon-links a:hover {
+            border-bottom-color: #1a6b8a;
+        }
+        .icon-links .link-icon {
+            font-size: 1.2rem;
         }
         .section {
             background: white;
@@ -231,6 +254,7 @@
             .model-grid { grid-template-columns: 1fr; }
             .model-card { flex-wrap: wrap; }
             .model-card audio { min-width: 120px; }
+            .icon-links { gap: 1rem; }
         }
     </style>
 </head>
@@ -239,7 +263,7 @@
 <h1>🎵 MMAG</h1>
 <div class="subtitle">Multi‑Control Mixed Audio Generation Benchmark</div>
 
-<!-- 作者信息：无方块包裹，仅居中显示 -->
+<!-- 作者信息（无方块） -->
 <div class="author-block">
     <div class="names">
         Zihao Zheng<sup>1,2</sup> · Xuenan Xu<sup>2</sup> · Jiahao Mei<sup>1</sup> · Yixuan Li<sup>1,2</sup> ·
@@ -253,6 +277,15 @@
         📧 rookie9@sjtu.edu.cn · mengyuewu@sjtu.edu.cn
     </div>
 </div>
+
+<!-- 一排图标链接（默认链接到 #，请自行替换真实 URL） -->
+<div class="icon-links">
+    <a href="#" target="_blank"><span class="link-icon">📄</span> arXiv</a>
+    <a href="#" target="_blank"><span class="link-icon">📝</span> Paper</a>
+    <a href="https://huggingface.co/datasets/rookie9/MMAG" target="_blank"><span class="link-icon">🤗</span> HF Datasets</a>
+    <a href="#" target="_blank"><span class="link-icon">💻</span>Code</a>
+</div>
+
 <!-- ==================== INTRODUCTION ==================== -->
 <div class="section">
     <h2>📄 Introduction</h2>
@@ -264,8 +297,6 @@
     </p>
     <p>
         All annotations are curated through a multi‑expert pipeline with human quality control.
-        <br>
-        <a class="hf-link" href="https://huggingface.co/datasets/rookie9/MMAG" target="_blank">🤗 View on Hugging Face</a>
     </p>
 
     <!-- ========== 第一张图：Intro 下面 ========== -->
