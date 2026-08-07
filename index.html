@@ -222,9 +222,8 @@
         <img src="https://cdn.simpleicons.org/arxiv/000000" alt="arXiv" />
         arXiv 论文
     </a>
-    <a href="#">
-        <img src="https://cdn.simpleicons.org/huggingface/000000" alt="Hugging Face" />
-        HF Datasets
+    <a href="https://huggingface.co/datasets/rookie9/MMAG">
+        <span style="font-size: 1.2rem; line-height: 1;">🤗</span> HF Datasets
     </a>
     <a href="#">
         <img src="https://cdn.simpleicons.org/github/000000" alt="GitHub" />
@@ -237,13 +236,17 @@
     <p>
         <strong>MMAG</strong> is a comprehensive benchmark for evaluating mixed audio generation under multiple control conditions.
         It consists of a <strong>Main Set</strong> for holistic evaluation, along with two dedicated subsets for
-        <strong>voice cloning</strong> (Prompt Set) and <strong>timestamp‑conditioned</strong> generation (Timestamp Set),
-        enabling fine‑grained assessment of speaker identity preservation, temporal alignment, and cross‑domain acoustic fidelity.
+        <strong>speaker identity preservation</strong> (Voice Cloning Set) and <strong>timestamp‑conditioned</strong> generation (Timestamp Set),
+        enabling assessment of holistic generation and fine‑grained control.
     </p>
     <p>
         All annotations are curated through a multi‑expert pipeline with human quality control.
     </p>
-
+    <div class="dataset-stats">
+        <span class="stat-item"><strong>Main Set</strong> ~4,000 clips</span>
+        <span class="stat-item"><strong>Voice Cloning Set</strong> ~690 clips</span>
+        <span class="stat-item"><strong>Timestamp Set</strong> ~1,800 clips</span>
+    </div>
     <!-- ========== 第一张图：Intro 下面 ========== -->
     <div style="margin-top: 1.5rem;">
         <div class="figure-item">
@@ -282,31 +285,12 @@
     </div>
 </div>
 
-<!-- ==================== STATISTICS ==================== -->
-<div class="section">
-    <h2>📊 Benchmark Statistics</h2>
-    <div class="dataset-stats">
-        <span class="stat-item"><strong>Main Set</strong> ~4,000 clips</span>
-        <span class="stat-item"><strong>Prompt Set (Voice Cloning)</strong> ~690 clips</span>
-        <span class="stat-item"><strong>Timestamp Set</strong> ~1,800 clips</span>
-    </div>
-    <div>
-        <span class="badge">speech</span>
-        <span class="badge">music</span>
-        <span class="badge">sound effects</span>
-        <span class="badge">temporal boundaries</span>
-        <span class="badge">speaker identity</span>
-    </div>
-    <p style="margin: 0.6rem 0 0 0; font-size:0.95rem;">
-        Sourced from <strong>AudioCaps</strong>, <strong>VGGSound</strong>, and <strong>MECAT</strong>.
-    </p>
-</div>
 
 <!-- ==================== AUDIO SAMPLES ==================== -->
 
 <!-- ==================== MAIN SET ==================== -->
 <div class="section">
-    <h2>🎧 Main Set – Holistic Generation</h2>
+    <h2>🎧 Main Set</h2>
 
     <!-- Sample 1 -->
     <div class="sample-block">
@@ -421,7 +405,7 @@
 
 <!-- ==================== PROMPT SET ==================== -->
 <div class="section">
-    <h2>🎤 Prompt Set – Voice Cloning</h2>
+    <h2>🎤 Voice Cloning Set </h2>
 
     <!-- Sample 1 -->
     <div class="sample-block">
@@ -552,7 +536,7 @@
 
 <!-- ==================== TIMESTAMP SET ==================== -->
 <div class="section">
-    <h2>⏱️ Timestamp Set – Temporal Control</h2>
+    <h2>⏱️ Timestamp Set</h2>
 
     <!-- Sample 1 -->
     <div class="sample-block">
@@ -653,7 +637,7 @@
 
 <!-- Footer -->
 <div class="footer">
-    MMAG &bull; Anonymous Submission &bull; ACL Rolling Review 2026
+    MMAG
 </div>
 
 </body>
